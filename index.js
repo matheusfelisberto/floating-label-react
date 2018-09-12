@@ -46,17 +46,6 @@ class FloatingLabel extends React.Component {
   state = {
     floating: false,
     focused: false,
-    value: this.props.value
-  };
-
-  handleChange = evt => {
-    const value = evt.target.value;
-
-    this.props.onChange(evt);
-
-    this.setState({
-      value
-    });
   };
 
   handleFocusChange = evt => {
@@ -72,8 +61,8 @@ class FloatingLabel extends React.Component {
   }
 
   render() {
-    const { value, focused } = this.state;
-    const { styles } = this.props;
+    const { focused } = this.state;
+    const { styles, value, onChange } = this.props;
     const floating = this.isFloating(value, focused);
     const Node = this.props.element;
     const floatingStyle = floating && Object.assign({}, floatingStyles, styles.floating);
@@ -101,7 +90,7 @@ class FloatingLabel extends React.Component {
           autoCapitalize={this.props.autoCapitalize}
           autoComplete={this.props.autoComplete}
           autoFocus={this.props.autoFocus}
-          defaultValue={this.props.value}
+          value={this.props.value}
           id={this.props.id}
           inputMode={this.props.inputMode}
           max={this.props.max}
@@ -110,7 +99,7 @@ class FloatingLabel extends React.Component {
           minLength={this.props.minLength}
           name={this.props.name}
           onBlur={this.handleFocusChange}
-          onChange={this.handleChange}
+          onChange={onChange}
           onFocus={this.handleFocusChange}
           pattern={this.props.pattern}
           readOnly={this.props.readOnly}
